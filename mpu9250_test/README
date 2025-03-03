@@ -1,0 +1,53 @@
+https://www.berrybase.de/mpu-9250-digitales-9-achsen-beschleunigungs-lage-kompasssensor-modul
+https://components101.com/sensors/MPU9250-9-dof-mems-sensor-module-datasheet-pinout-features-working
+https://github.com/soarbear/mpu9250_imu_ros
+https://github.com/tuupola/micropython-mpu9250
+
+Das GY-250 ist ein 9-Achsen Lageerkennungsmodul dass folgende Sensoren vereint:
+-------------------------------------------------------------------------------
+- 3-Achsen Gyroskop
+- 3-Achsen Beschleunigungssenso
+- 3-Achsen Magnetfeldsensor (Erdmagnetfeld/Kompass)
+
+Ebenso ist ein Digital Motion Processor (DMP) in einer winzigen Gehäusegröße von nur 3x3x1mm vereint.
+Das Modul ist Pin-kompatibel zum Vorgänger MPU-6515 und kann über einen I2C-Bus angesprochen werden.
+
+Technische Daten:
+Three 16-bit analog-to-digital converters (ADCs) for digitizing the gyroscope outputs
+Three 16-bit ADCs for digitizing the accelerometer outputs
+Three 16-bit ADCs for digitizing the magnetometer outputs
+Gyroscope full-scale range of ±250, ±500, ±1000, and ±2000°/sec (dps)
+Accelerometer full-scale range of ±2g, ±4g, ±8g, and ±16g
+Magnetometer full-scale range of ±4800μT
+I2C and SPI serial interfaces
+Power supply: 3-5v
+
+
+MPU9250 Module Pinout
+Pin Number  Pin Name    Description
+1   VCC Power Supply
+2   GND Ground Reference
+3   SCL I2C Serial Clock
+4   SDA I2C Serial Data
+5   EDA Auxiliary Serial Data
+6   ECL Auxiliary Serial Clock
+7   AD0 I2C/SPI Address Select
+8   INT Interrupt
+9   NCS SPI Chip Select
+10  FSYNC   Frame Synchronization
+
+
+Hookup of module to Raspberry Pi Pico 2
+using I2C0
+---------------------------------------
+
+module has LDO regulator for 3.3V from VCC
+module has 10k pull-up resitors on SCA SDA and NCS
+module has 10k pull-down resistors on MISO (ADO) and FSYNC
+
+GND - GND
+VCC - VBUS (+5V)
+SCL - I2C0-SCL - GPIO 5
+SDA - I2C0-SDA - GPIO 4
+
+!!! the sensor board I have has a different chip without the magnetometer !!!

@@ -1,0 +1,18 @@
+Testing the MicroPython PWM facility for the RPi Pico2
+------------------------------------------------------
+
+pwm_test.py
+A LED is driven by a PWM output pin. The frequency is low enough
+to be percived as fast blinking. The on time is varied from full
+(glitch-free continuous high) via 2 steps to zero (glitch free low).
+
+servo.py
+A python class for an R/C servo driven with a PWM signal.
+The pulse repetition frequency defaults to 50 Hz, the pulse length
+to 1.0-2.0 ms. The PWM interval is mapped to a either
+a (-1.0, 1.0) default centered=True or [0.0, 1.0) centered=False range.
+
+servo_tester.py
+Demonstrator for Servo class.
+An RC Servo on GPIO16 is driven from the center to one end and back,
+a second later to the other end and back, repeating continuously.

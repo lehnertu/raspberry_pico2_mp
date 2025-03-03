@@ -1,0 +1,46 @@
+PJRC Teensy SD card adapter
+https://www.pjrc.com/teensy/sd_adaptor.html
+
+hookup of SD card
+-----------------
+Vcc - 3.3V
+GND - GND
+SCLK - SPI0 SCK (GPIO 18)
+MOSI - SPI0 TX (GPIO 19)
+MISO - SPI0 RX (GPIO 16)
+SS - SPI0 CS (GPIO 17)
+
+The program vfs_littlefs_test.py runs on a Raspberry Pico2
+and creates 2 files under LittleFS on a connected SD card.
+
+The card can be read under Linux in the following way:
+1) installation
+sudo apt-get install libfuse-dev
+cd ~/Programming
+git clone https://github.com/littlefs-project/littlefs-fuse.git
+cd littlefs-fuse
+make
+2) mount a card
+mkdir mount
+sudo ./lfs /dev/mmcblk0 mount
+# now the card content is visible under mount/
+sudo umount mount
+
+!!! The SD card can be mounted and read, but after that the
+SDcard library on the Pico2 cannot access it anymore !!!
+    OSError: [SDCard] readblocks() CMD(17) responds 5
+It can be re-formatted on the Pico2 without problems.
+Only the first try fails on the Pico2, on a second attempt the card works.
+Also files written from the PC are then readable.
+
+check hardware SPI setup:
+
+registers:
+SPI0 start at 0x40080000
+SPI1 start at 0x40088000
+0x000 SSPCR0 Control register 0
+0x004 SSPCR1 Control register 1
+0x008 SSPDR Data register
+0x00c SSPSR Status register
+0x010 SSPCPSR Clock prescale register
+...
